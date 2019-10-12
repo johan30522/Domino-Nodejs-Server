@@ -1,0 +1,18 @@
+{
+    "development": {
+        "rootCertificate": "certs/ca.crt",
+        "clientCertificate": "certs/app1.crt",
+        "clientKey": "certs/app1.key",
+        "Domino_hostName": "domino-server1.example.com",
+        "Domino_port": 3002,
+        "Domino_FilePath": "node-demo.nsf"
+    },
+    "production": {
+        "rootCertificate": "certs/ca.crt",
+        "clientCertificate": "certs/app1.crt",
+        "clientKey": "certs/app1.key",
+        "Domino_hostName": "domino-server1.example.com",
+        "Domino_port": 3002,
+        "Domino_FilePath": "node-demo.nsf"
+    }
+}
