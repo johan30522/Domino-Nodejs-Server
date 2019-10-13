@@ -6,6 +6,8 @@
 //Obtiene la configuracion desde domino
 const configDomino = require("../../config/dominoConfig");
 
+const contact=require('../../model/contact');
+
 /**
  * @api {get} /api/contact/
  * Obtiene la lista de documentos de contacto que estan almacendaod
@@ -48,7 +50,6 @@ const get = (req, res) => {
  */
 const getByUNID = (req, res) => {
   let idParam = req.params.id;
-  let document = null;
   let myDocument;
   configDomino.useServer(configDomino.serverConfig).then(async server => {
     const database = await server.useDatabase(configDomino.databaseConfig);
@@ -84,8 +85,6 @@ const getByUNID = (req, res) => {
  */
 const del = (req, res) => {
   let idParam = req.params.id;
-  let document = null;
-  let myDocument = null;
   configDomino.useServer(configDomino.serverConfig).then(async server => {
     const database = await server.useDatabase(configDomino.databaseConfig);
     const document = await database.useDocument({
@@ -119,15 +118,7 @@ const del = (req, res) => {
  */
 const post = (req, res) => {
   let idParametro = req.params.id;
-  //print(req.body);
-  console.log(req.body.aaa);
-  let document = {
-    Form: "Contact",
-    FirstName: req.body.FirstName,
-    LastName: req.body.LastName,
-    City: req.body.City,
-    State: req.body.State
-  };
+  let document = contact.newDocument(req.body);
   //Conecta al Servidor domino y ejecuta el comando
   configDomino.useServer(configDomino.serverConfig).then(async server => {
     const database = await server.useDatabase(configDomino.databaseConfig);
@@ -156,24 +147,16 @@ const post = (req, res) => {
  */
 const put = (req, res) => {
   let _unid = req.body['@unid'];
-  let documents = null;
-  let myDocument;
-  console.log(req.body);
+  let replaceItems = contact.replaceItems(req.body);
   if (_unid != "") {
     configDomino.useServer(configDomino.serverConfig).then(async server => {
       const database = await server.useDatabase(configDomino.databaseConfig);
       const document = await database.useDocument({
         unid: _unid
       });
-
       let result = await document
         .replaceItems({
-          replaceItems: {
-            FirstName: req.body.FirstName,
-            LastName: req.body.LastName,
-            City: req.body.City,
-            State: req.body.State
-          }
+          replaceItems
         })
         .catch(e => {
           console.log(e);
