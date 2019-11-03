@@ -12,6 +12,9 @@ const logger = require('morgan');
 const contactRoutes = require('../api/contact/routes');
 const cors = require('cors');
 
+// environment variables
+process.env.NODE_ENV = 'development';
+
 app.use(cors({origin:'http://localhost:4200'}));//se agrega para que permita peticiones del servidor de desarrollo de angular en el 4200.
 
 
