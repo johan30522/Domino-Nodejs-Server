@@ -5,7 +5,8 @@
         "clientKey": "certs/app1.key",
         "Domino_hostName": "domino-server1.example.com",
         "Domino_port": 3002,
-        "Domino_FilePath": "node-demo.nsf"
+        "Domino_FilePath": "node-demo.nsf",
+        "url_frontend":"http://localhost:4200"
     },
     "production": {
         "rootCertificate": "certs/ca.crt",
@@ -13,6 +14,7 @@
         "clientKey": "certs/app1.key",
         "Domino_hostName": "domino-server1.example.com",
         "Domino_port": 3002,
-        "Domino_FilePath": "node-demo.nsf"
+        "Domino_FilePath": "node-demo.nsf",
+        "url_frontend":"http://localhost:4200"
     }
 }
